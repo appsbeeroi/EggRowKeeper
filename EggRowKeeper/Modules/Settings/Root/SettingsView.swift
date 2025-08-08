@@ -5,7 +5,7 @@ struct SettingsView: View {
     @AppStorage("isNotificationEnable") var isNotificationEnable = true
     @AppStorage("Currency") var currency: String = "USD"
     
-    @StateObject private var viewModel = SettingsViewModel()
+    @StateObject var viewModel: SettingsViewModel
     
     @State private var isShowNotificationAlert = false
 
@@ -97,6 +97,6 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView()
+    SettingsView(viewModel: SettingsViewModel(databaseService: DatabaseService()))
 }
 

@@ -2,6 +2,8 @@ import UIKit
 
 final class SettingsViewModel: ObservableObject {
     
+    private let databaseService: DatabaseService
+    
     @Published var currentCurrency: Currency = AppState.shared.currency
     
     @Published var isNotificationEnable = false
@@ -10,7 +12,8 @@ final class SettingsViewModel: ObservableObject {
     @Published var isShowMeasurementView = false
     @Published var isShowCleanHistoryAlert = false
     
-    init() {
+    init(databaseService: DatabaseService) {
+        self.databaseService = databaseService
         currentCurrency = AppState.shared.currency
     }
     
@@ -34,8 +37,16 @@ final class SettingsViewModel: ObservableObject {
     }
     
     func cleanHistory() {
-        hasJustHistoryCleaned = true
-        isShowCleanHistoryAlert = false
+        Task { [weak self] in
+            guard let self else { return }
+          
+            await self.databaseService.removeAll()
+            
+            await MainActor.run {
+                self.hasJustHistoryCleaned = true
+                self.isShowCleanHistoryAlert = false
+            }
+        }
     }
     
     func openAppSettings() {

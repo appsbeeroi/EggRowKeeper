@@ -50,6 +50,7 @@ struct CleanHistoryAlert: View {
                 
                 Button {
                     action()
+                    isPresented = false 
                 } label: {
                     ZStack {
                         LinearGradient(

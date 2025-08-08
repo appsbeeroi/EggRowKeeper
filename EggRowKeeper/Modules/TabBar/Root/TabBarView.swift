@@ -15,25 +15,32 @@ struct TabBarView: View {
         ZStack {            
             VStack {
                 TabView(selection: $currentPage) {
-                    FridgeView(viewModel: FridgeViewModel(realmService: realmService),
+                    FridgeView(viewModel: FridgeViewModel(
+                        realmService: realmService),
                                isShowTabBar: $isShowTabBar)
-                        .tag(TabBarPage.fridge)
-                        .gesture(DragGesture())
+                    .tag(TabBarPage.fridge)
+                    .gesture(DragGesture())
                     
                     AnalysisView(viewModel: AnalysisViewModel(realmService: realmService))
                         .tag(TabBarPage.analysis)
-                        .gesture(DragGesture())
+                        .gesture(
+                            DragGesture()
+                        )
                     
                     ShoppingView(viewModel: ShoppingViewModel(realmService: realmService),
                                  isShowTabBar: $isShowTabBar)
-                        .tag(TabBarPage.shopping)
-                        .gesture(DragGesture())
+                    .tag(TabBarPage.shopping)
+                    .gesture(
+                        DragGesture()
+                    )
                     
                     EggOfTheDayView()
                         .tag(TabBarPage.egg)
-                        .gesture(DragGesture())
+                        .gesture(
+                            DragGesture()
+                        )
                     
-                    SettingsView()
+                    SettingsView(viewModel: SettingsViewModel(databaseService: realmService))
                         .tag(TabBarPage.settings)
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))

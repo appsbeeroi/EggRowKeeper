@@ -61,4 +61,17 @@ extension DatabaseService {
             print(error.localizedDescription)
         }
     }
+    
+    @MainGlobalActor
+    func removeAll() async {
+        guard let realmManager else { return }
+        
+        do {
+            try realmManager.write {
+                realmManager.deleteAll()
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 }
