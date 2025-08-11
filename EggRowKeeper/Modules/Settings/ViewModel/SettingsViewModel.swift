@@ -6,6 +6,7 @@ final class SettingsViewModel: ObservableObject {
     
     @Published var currentCurrency: Currency = AppState.shared.currency
     
+    @Published var linkType: AppInfoLink?
     @Published var isNotificationEnable = false
     @Published var hasJustHistoryCleaned = false
     @Published var isShowCurrencyView = false
@@ -20,17 +21,15 @@ final class SettingsViewModel: ObservableObject {
     func handleAction(by type: SettingsCellType) {
         switch type {
             case .privacy:
-                showDocuments(type: .privacy)
+                linkType = .privacy
             case .currency:
                 isShowCurrencyView.toggle()
             case .measurement:
                 isShowMeasurementView.toggle()
-            case .terms:
-                showDocuments(type: .terms)
             case .history:
                 isShowCleanHistoryAlert.toggle()
             case .aboutDeveloper:
-                showDocuments(type: .developerInfo)
+                linkType = .developerInfo
             default:
                 break
         }
@@ -54,15 +53,5 @@ final class SettingsViewModel: ObservableObject {
         if UIApplication.shared.canOpenURL(settingsURL) {
             UIApplication.shared.open(settingsURL)
         }
-    }
-
-    
-    private func showDocuments(type: AppInfoLink) {
-        guard UIApplication.shared.canOpenURL(type.url) else {
-            print("❗️Can't open URL: \(type.url)")
-            return
-        }
-        
-        UIApplication.shared.open(type.url, options: [:], completionHandler: nil)
     }
 }

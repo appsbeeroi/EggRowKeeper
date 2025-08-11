@@ -40,8 +40,9 @@ struct TabBarView: View {
                             DragGesture()
                         )
                     
-                    SettingsView(viewModel: SettingsViewModel(databaseService: realmService))
-                        .tag(TabBarPage.settings)
+                    SettingsView(viewModel: SettingsViewModel(databaseService: realmService),
+                                 isShowTabBar: $isShowTabBar)
+                    .tag(TabBarPage.settings)
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             }

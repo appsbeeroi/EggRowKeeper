@@ -7,6 +7,8 @@ struct SettingsView: View {
     
     @StateObject var viewModel: SettingsViewModel
     
+    @Binding var isShowTabBar: Bool
+    
     @State private var isShowNotificationAlert = false
 
     var body: some View {
@@ -54,8 +56,23 @@ struct SettingsView: View {
                 } label: {
                     EmptyView()
                 }
+                
+                if let type = viewModel.linkType,
+                   let url = type.url {
+                    WebViewBrowser(url: url) {
+                        viewModel.linkType = nil
+                    }
+                    .ignoresSafeArea(edges: [.bottom])
+                    .onAppear {
+                        isShowTabBar = false
+                    }
+                    .onDisappear {
+                        isShowTabBar = true
+                    }
+                }
             }
             .animation(.default, value: viewModel.isShowCleanHistoryAlert)
+            .animation(.default, value: viewModel.linkType)
             .onAppear {
                 viewModel.isNotificationEnable = isNotificationEnable
             }
@@ -97,6 +114,13 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView(viewModel: SettingsViewModel(databaseService: DatabaseService()))
+    SettingsView(
+        viewModel: SettingsViewModel(
+            databaseService: DatabaseService()
+        ),
+        isShowTabBar: .constant(
+            false
+        )
+    )
 }
 

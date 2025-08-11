@@ -5,7 +5,6 @@ enum SettingsCellType: CaseIterable, Identifiable {
     case currency
     case measurement
     case notification
-    case terms
     case history
     case aboutDeveloper
     
@@ -19,8 +18,6 @@ enum SettingsCellType: CaseIterable, Identifiable {
                 "Measurement"
             case .notification:
                 "Notification"
-            case .terms:
-                "Terms of Use"
             case .history:
                 "History clean"
             case .aboutDeveloper:

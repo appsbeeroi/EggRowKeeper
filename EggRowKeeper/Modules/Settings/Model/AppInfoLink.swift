@@ -2,17 +2,14 @@ import Foundation
 
 enum AppInfoLink: CaseIterable {
     case privacy
-    case terms
     case developerInfo
 
-    var url: URL {
+    var url: URL? {
         switch self {
         case .privacy:
-            return URL(string: "https://example.com/privacy")!
-        case .terms:
-            return URL(string: "https://example.com/terms")!
+            return URL(string: "https://sites.google.com/view/eggrow-keeper/privacy-policy")
         case .developerInfo:
-            return URL(string: "https://example.com/developer")!
+            return URL(string: "https://sites.google.com/view/eggrow-keeper/home")
         }
     }
 }
