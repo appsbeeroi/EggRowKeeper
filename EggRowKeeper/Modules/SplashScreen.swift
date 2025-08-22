@@ -21,12 +21,6 @@ struct SplashScreen: View {
         }
         .onAppear {
             isAnimateText = true
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-                withAnimation {
-                    isShowMainFlow = true
-                }
-            }
         }
     }
 }
