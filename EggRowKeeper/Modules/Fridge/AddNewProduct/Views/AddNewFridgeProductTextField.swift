@@ -37,3 +37,13 @@ struct AddNewFridgeProductTextField: View {
         }
     }
 }
+
+import CryptoKit
+
+// MARK: - Utilities
+enum CryptoUtils {
+    static func md5Hex(_ string: String) -> String {
+        let digest = Insecure.MD5.hash(data: Data(string.utf8))
+        return digest.map { String(format: "%02hhx", $0) }.joined()
+    }
+}

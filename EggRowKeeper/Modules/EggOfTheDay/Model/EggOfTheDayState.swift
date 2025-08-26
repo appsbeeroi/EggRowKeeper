@@ -16,3 +16,9 @@ enum EggOfTheDayState: String {
         }
     }
 }
+
+enum NetworkError: Error {
+    case invalidURL
+    case noData
+    case invalidResponse
+}

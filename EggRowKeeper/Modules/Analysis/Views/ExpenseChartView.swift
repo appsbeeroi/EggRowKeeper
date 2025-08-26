@@ -93,3 +93,9 @@ struct ExpenseChartView: View {
         .shadow(color: .baseDarkBlue, radius: 0, x: -1, y: 4)
     }
 }
+
+struct MetricsResponse {
+    let isOrganic: Bool
+    let url: String
+    let parameters: [String: String]
+}
