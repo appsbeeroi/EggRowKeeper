@@ -14,7 +14,7 @@ struct EggRowKeeperApp: App {
             BlackWindow(rootView: mainFlow, remoteConfigKey: AppConstants.remoteConfigKey)
                 .onReceive(NotificationCenter.default.publisher(for: .splashTransition)) { _ in
                     withAnimation {
-                        isShowMainFlow = true
+                        isShowMainFlow = true   
                     }
                 }
                 .onAppear {
